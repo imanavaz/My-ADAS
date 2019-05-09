@@ -5,6 +5,11 @@ import time
 import RPi.GPIO as GPIO
 
 
+#====================
+#=   Preparations   =
+#====================
+
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
@@ -17,10 +22,14 @@ GPIO.setup(doorStatusLED,GPIO.OUT)
 GPIO.output(doorStatusLED,GPIO.LOW)#set it to low by default
 
 
-#'Farnoosh','A0:10:81:C5:13:7C'
-devices = [['Iman','34:14:5F:E2:4E:9C'], ['Farnoosh','A0:10:91:C5:13:7C']]
+#'F','A0:10:81:C5:13:7C'
+devices = [['I','34:14:5F:E2:4E:9C'], ['F','A0:10:91:C5:13:7C']]
 doorLocked = True 
 
+
+#====================
+#=       Code       =
+#====================
 
 def checkDevices(deviceList):
 	for d in range(len(deviceList)):
