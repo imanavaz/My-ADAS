@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void sendMessage(String message) {
         if (!mConnected) {
-            Log.e(TAG, "either mConnect fasle, or mInitialized is false");
+            Log.e(TAG, "mConnect os false");
             return;
         }
 
@@ -215,10 +215,12 @@ public class MainActivity extends AppCompatActivity{
     private void scanComplete() {
         if (mScanResults.isEmpty()) {
             setStatus("Could not find Sabzak!");
+            Log.d(TAG, "Coud not find Sabzak at "+ deviceAddress);
             return;
         }
         for (String deviceAddress : mScanResults.keySet()) {
-            setStatus("Found Sabzak -> "+ deviceAddress);
+            setStatus("Found Sabzak");
+            Log.d(TAG, "Found Sabzak -> "+ deviceAddress);
             sabzak = mScanResults.get(deviceAddress);
             connectDevice(sabzak);
             mConnected = true;
@@ -252,7 +254,8 @@ public class MainActivity extends AppCompatActivity{
     //GATT connection
 
     private void connectDevice(BluetoothDevice device) {
-        setStatus("Connecting to " + device.getAddress());
+        setStatus("Connecting ...");
+        Log.d(TAG," Connecting to "+ device.getAddress());
         GattClientCallback gattClientCallback = new GattClientCallback();
         mGatt = device.connectGatt(this, false, gattClientCallback);
     }
@@ -262,7 +265,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void disconnectGattServer() {
-        setStatus("Closing Gatt connection");
+        //setStatus("Closing Gatt connection");
         Log.d(TAG,"Closing Gatt connection.");
         mConnected = false;
         if (mGatt != null) {
@@ -325,10 +328,12 @@ public class MainActivity extends AppCompatActivity{
             }
 
             if (newState == BluetoothProfile.STATE_CONNECTED) {
+                setStatus("** Connected to Sabzak **");
                 Log.d(TAG, "Connected to device " + gatt.getDevice().getAddress());
                 setConnected(true);
                 gatt.discoverServices();
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                setStatus("Disconnected from Sabzak!");
                 Log.w(TAG, "Disconnected from device");
                 disconnectGattServer();
             }
