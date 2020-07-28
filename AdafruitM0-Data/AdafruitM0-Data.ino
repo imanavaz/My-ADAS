@@ -25,6 +25,11 @@
 #endif
 
 int ledPin = 13;
+int doorOpenPin = 12;
+int doorClosePin = 11;
+int rightBLISPin = 9;
+int leftBLISPin = 6;
+
 /*=========================================================================
     APPLICATION SETTINGS
 
@@ -155,6 +160,10 @@ void setup(void)
   Serial.println(F("******************************"));
 
   pinMode(ledPin, OUTPUT);    
+  pinMode(doorOpenPin, OUTPUT);
+  pinMode(doorClosePin, OUTPUT);
+  pinMode(rightBLISPin, OUTPUT);
+  pinMode(leftBLISPin, OUTPUT);
 }
 
 /**************************************************************************/
@@ -190,11 +199,45 @@ void loop(void)
     switch (d){
       case 'B':
         //Open door
+        digitalWrite(doorOpenPin, HIGH);
         digitalWrite(ledPin, HIGH);
+        delay(1000); //wait half a second for the relays to operate
+        digitalWrite(doorOpenPin, LOW);
+        digitalWrite(ledPin, LOW);
+        Serial.print("Door assumed open!");
         break;
       case 'C':
         //Close door
+        digitalWrite(doorClosePin, HIGH);
+        digitalWrite(ledPin, HIGH);
+        delay(1000); //wait half a second for the relays to operate
+        digitalWrite(doorClosePin, LOW);
         digitalWrite(ledPin, LOW);
+        Serial.print("Door assumed closed!");
+        break;
+      case 'R':
+        //Right BLIS on 
+        digitalWrite(rightBLISPin, HIGH);
+        digitalWrite(ledPin, HIGH);
+        Serial.print("Right BLIS on");
+        break;
+      case 'O':
+        //Right BLIS Off
+        digitalWrite(rightBLISPin, LOW);
+        digitalWrite(ledPin, LOW);
+        Serial.print("Right BLIS off");
+        break;
+      case 'L':
+        //Left BLIS on
+        digitalWrite(leftBLISPin, HIGH);
+        digitalWrite(ledPin, HIGH);
+        Serial.print("Left BLIS on");
+        break;
+      case 'P':
+        //Left BLIS Off
+        digitalWrite(leftBLISPin, LOW);
+        digitalWrite(ledPin, LOW);
+        Serial.print("Left BLIS off");
         break;
       default:
         Serial.print("data not recognised");
