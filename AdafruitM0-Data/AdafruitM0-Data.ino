@@ -201,7 +201,7 @@ void loop(void)
         //Open door
         digitalWrite(doorOpenPin, HIGH);
         digitalWrite(ledPin, HIGH);
-        delay(1000); //wait half a second for the relays to operate
+        delay(600); //wait half a second for the relays to operate
         digitalWrite(doorOpenPin, LOW);
         digitalWrite(ledPin, LOW);
         Serial.print("Door assumed open!");
@@ -210,7 +210,7 @@ void loop(void)
         //Close door
         digitalWrite(doorClosePin, HIGH);
         digitalWrite(ledPin, HIGH);
-        delay(1000); //wait half a second for the relays to operate
+        delay(600); //wait half a second for the relays to operate
         digitalWrite(doorClosePin, LOW);
         digitalWrite(ledPin, LOW);
         Serial.print("Door assumed closed!");
