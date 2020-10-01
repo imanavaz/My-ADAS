@@ -28,7 +28,7 @@ int ledPin = 13;
 int doorOpenPin = 12;
 int doorClosePin = 11;
 int rightBLISPin = 9;
-int leftBLISPin = 6;
+int leftBLISPin = 5;
 
 /*=========================================================================
     APPLICATION SETTINGS
@@ -160,10 +160,15 @@ void setup(void)
   Serial.println(F("******************************"));
 
   pinMode(ledPin, OUTPUT);    
+  
   pinMode(doorOpenPin, OUTPUT);
+  digitalWrite(doorOpenPin, LOW);
   pinMode(doorClosePin, OUTPUT);
+  digitalWrite(doorClosePin, LOW);
   pinMode(rightBLISPin, OUTPUT);
+  digitalWrite(rightBLISPin, LOW);
   pinMode(leftBLISPin, OUTPUT);
+  digitalWrite(leftBLISPin, LOW);
 }
 
 /**************************************************************************/
